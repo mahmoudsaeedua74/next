@@ -40,7 +40,9 @@ export default function RecommendedCategoriesComponent({
   return (
     <section>
       <div>
-        <Heading title={recommendedCategories?.recommendedCategories[0]?.sectionTitle} />
+        <Heading
+          title={recommendedCategories?.recommendedCategories[0]?.sectionTitle}
+        />
       </div>
       <div className="relative px-12">
         <Carousel
