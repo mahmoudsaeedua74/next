@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+    --main-color: hsl(35 84% 53%);
+    --font-family: "sans-serif";
+}
+body {
+    font-family: var(--font-family);
+}
+.themed-text {
+    color: var(--main-color);
+}
+.heroProduct-text:hover {
+    color: var(--main-color);
+}
+.combinedCategories:hover {
+    color: var(--main-color);
+}
+.bg-main {
+    background-color: var(--main-color);
+}
+.bg-main:hover {
+    filter: brightness(115%);
+}
+.bg-whit {
+    background-color: #fff;
+}
+.bg-whit:hover {
+    background-color: var(--main-color);
+    color: #fff;
+    border: solid 2px var(--main-color);
+}
+.bg-icon {
+    background-color: #ffff;
+    border: solid 1px var(--main-color);
+}
+.bg-icon:hover{
+    background-color: var(--main-color);
+    color: #fff;
+    border: solid 1px var(--main-color);
+}
+.bg-empty {
+    background-color: #ffff;
+}
+.bg-empty:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
+.border-main {
+    border-style: var(--main-color);
+    border: solid 2px;
+}
+
+/* for slider price */
+.range-slider .range-slider__thumb {
+    z-index: 3;
+    background: var(--main-color) !important;
+    border-radius: 50%;
+    width: 20px !important;
+    height: 20px !important;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.range-slider .range-slider__range {
+    z-index: 1;
+    background: var(--main-color) !important;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+/* for icon in navbar*/
+.icon-navbar:hover {
+    color: var(--main-color);
+}
+
+@layer components {
+    .contain {
+        @apply w-[85%] mx-auto;
+    }
+}
+/* for Loading */
+
+.right-to-left-loading,
+.skeleton-loading-animation {
+    background: linear-gradient(
+        to left,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 20%,
+        rgba(255, 255, 255, 0.4) 20%,
+        transparent 100%
+    );
+    width: 50%;
+    height: 100%;
+    animation: rightToLeftLoading 1.8s infinite;
+    color: 35 84% 53%;
+}
+@keyframes rightToLeftLoading {
+    0% {
+        transform: translateX(100%);
+    }
+
+    50% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+/* for Tooltip Content*/
+.TooltipContent {
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    z-index: 811;
+    color: white;
+    background-color: var(--main-color);
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+        hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    user-select: none;
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+.TooltipContent[data-state="delayed-open"][data-side="top"] {
+    animation-name: slideDownAndFade;
+}
+.TooltipContent[data-state="delayed-open"][data-side="right"] {
+    animation-name: slideLeftAndFade;
+}
+.TooltipContent[data-state="delayed-open"][data-side="bottom"] {
+    animation-name: slideUpAndFade;
+}
+.TooltipContent[data-state="delayed-open"][data-side="left"] {
+    animation-name: slideRightAndFade;
+}
+.TooltipArrow {
+    fill: var(--main-color);
+}
+@keyframes slideUpAndFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideRightAndFade {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes slideDownAndFade {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideLeftAndFade {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
