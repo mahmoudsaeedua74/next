@@ -6,7 +6,7 @@ import CategoryDropdown from "./CategoryDropdown ";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import logoTow from "@/assets/logo/1743182423TOOLLISTING_logo.png";
+import logoTow from "../../../public/logo.jpg";
 import { useHeader, useThem } from "@/lib/api/queries";
 import { Header, NavbarProps } from "@/types/navbar";
 export default function MobileSidebar({ isOpen, setIsOpen }: NavbarProps) {
