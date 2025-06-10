@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 //get all countries in bottom navbar
-const BASEURL = "https://admin.findgreenery.com/api";
+const BASEURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const useCountries = () => {
   return useQuery({
     queryKey: ["countries"],

@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/lib/context/Them";
 import SiteMeta from "@/components/common/SiteMeta";
 import { Metadata } from "next";
 
-const BASEURL = "https://admin.findgreenery.com/api";
+const BASEURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 async function getMetadata() {
     if (!BASEURL) {
         console.error("NEXT_PUBLIC_API_BASE_URL is not defined");
