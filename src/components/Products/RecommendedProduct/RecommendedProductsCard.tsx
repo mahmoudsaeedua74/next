@@ -6,7 +6,7 @@ import Badge from "@/components/ui/Badge/Badge";
 import { Product } from "@/types/Product";
 import ProductsInfo from "./ProductsInfo";
 import Icon from "./Icon";
-import placeholderImage from "../../../../public/categoryLoading.jpg";
+import placeholderImage from "../../../../public/categoryLoading.jpg.jpg";
 
 interface RecommendedProductsCardProps {
   item: Product;
