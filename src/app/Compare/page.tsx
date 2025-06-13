@@ -29,7 +29,7 @@ const detailKeys = [
   "UnitCount",
 ];
 const attributes = ["Product", "Name", "price", ...detailKeys, "Actions"];
-export default function Page() {
+export default function ComparePage() {
   const dispatch = useAppDispatch();
   const compareItems = useAppSelector(
     (state) => state.compareSlice.compareItems

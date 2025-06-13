@@ -1,13 +1,15 @@
 "use client";
 import Link from "next/link";
-import CategoryDropdown from "./CategoryDropdown ";
 import { useHeader } from "@/lib/api/queries";
 import { Header } from "@/types/navbar";
+import CategoryDropdown from "./CategoryDropdown ";
+
 export default function BottomNav() {
   const { data, isLoading } = useHeader();
+
   return (
     <div className="border">
-      <div className="flex gap-12 items-center  contain">
+      <div className="flex gap-12 items-center contain">
         <div>
           <CategoryDropdown />
         </div>
@@ -27,34 +29,31 @@ export default function BottomNav() {
                 if (pageLink === "/products/show/") {
                   pageLink = "/products";
                 }
-                if (pageLink === "/compare") {
-                  pageLink = "/compare";
-                }
-                if (pageLink === "/wishlist") {
-                  pageLink = "/wishlist";
-                }
                 if (pageLink === "https://toollistings.com/") {
                   pageLink = "/";
                 }
+
                 const isExternalLink = pageLink.startsWith("http");
-                console.log(pageLink, "pageLink");
-                console.log(isExternalLink, "isExternalLink");
+
                 if (isExternalLink) {
                   return (
-                    <Link
-                      href={pageLink}
-                      key={item.id}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.title}
-                    </Link>
+                    <li key={item.id}>
+                      <Link
+                        href={pageLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.title}
+                      </Link>
+                    </li>
                   );
                 } else {
                   return (
-                    <Link href={`${pageLink}`} key={item.id}>
-                      {item.title}
-                    </Link>
+                    <li key={item.id}>
+                      <Link href={pageLink}>
+                        {item.title}
+                      </Link>
+                    </li>
                   );
                 }
               })
