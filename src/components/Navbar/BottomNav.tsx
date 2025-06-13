@@ -27,6 +27,12 @@ export default function BottomNav() {
                 if (pageLink === "/products/show/") {
                   pageLink = "/products";
                 }
+                if (pageLink === "/compare") {
+                  pageLink = "/compare";
+                }
+                if (pageLink === "/wishlist") {
+                  pageLink = "/wishlist";
+                }
                 if (pageLink === "https://toollistings.com/") {
                   pageLink = "/";
                 }
@@ -46,7 +52,7 @@ export default function BottomNav() {
                   );
                 } else {
                   return (
-                    <Link href={`${pageLink.toLowerCase()}`} key={item.id}>
+                    <Link href={`${pageLink}`} key={item.id}>
                       {item.title}
                     </Link>
                   );
