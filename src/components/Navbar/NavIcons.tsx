@@ -5,29 +5,30 @@ import Link from "next/link";
 import TooltipComponent from "../ui/Tooltip/Tooltip";
 
 export default function NavIcons({ className = "" }: { className?: string }) {
-  // The countries section will be temporarily hidden until it's added in the future.
 
-  // const [localizationOpen, setLocalizationOpen] = useState(false);
-  // const localizationRef = useRef<HTMLDivElement>(null);
-  // const { data: countries } = useCountries();
-  // useEffect(() => {
-  //     const handleClickOutside = (event: MouseEvent) => {
-  //         if (
-  //             localizationRef.current &&
-  //             !localizationRef.current.contains(event.target as Node)
-  //         ) {
-  //             setLocalizationOpen(false);
-  //         }
-  //     };
+    // The countries section will be temporarily hidden until it's added in the future.
 
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //     return () => {
-  //         document.removeEventListener("mousedown", handleClickOutside);
-  //     };
-  // }, []);
-  return (
-    <div className={`flex items-center z-[60] gap-2 ${className}`}>
-      {/* <div className="relative" ref={localizationRef}>
+    // const [localizationOpen, setLocalizationOpen] = useState(false);
+    // const localizationRef = useRef<HTMLDivElement>(null);
+    // const { data: countries } = useCountries();
+    // useEffect(() => {
+    //     const handleClickOutside = (event: MouseEvent) => {
+    //         if (
+    //             localizationRef.current &&
+    //             !localizationRef.current.contains(event.target as Node)
+    //         ) {
+    //             setLocalizationOpen(false);
+    //         }
+    //     };
+
+    //     document.addEventListener("mousedown", handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener("mousedown", handleClickOutside);
+    //     };
+    // }, []);
+    return (
+        <div className={`flex items-center z-[60] gap-2 ${className}`}>
+            {/* <div className="relative" ref={localizationRef}>
                 <button
                     className="dropdown-button"
                     onClick={() => setLocalizationOpen(!localizationOpen)}
@@ -73,18 +74,18 @@ export default function NavIcons({ className = "" }: { className?: string }) {
                     </div>
                 )}
             </div> */}
-      {/* Wishlist */}
-      <TooltipComponent title="Wishlist">
-        <Link href="/wishlist" className="icon-with-text icon-navbar">
-          <Heart />
-        </Link>
-      </TooltipComponent>
-      {/* Compare */}
-      <TooltipComponent title="Compare">
-        <Link href="/compare" className="icon-with-text icon-navbar">
-          <GitCompareArrows />
-        </Link>
-      </TooltipComponent>
-    </div>
-  );
+            {/* Wishlist */}
+            <TooltipComponent title="Wishlist">
+                <Link href="/Wishlist" className="icon-with-text icon-navbar">
+                    <Heart />
+                </Link>
+            </TooltipComponent>
+            {/* Compare */}
+            <TooltipComponent title="Compare">
+                <Link href="/Compare" className="icon-with-text icon-navbar">
+                    <GitCompareArrows />
+                </Link>
+            </TooltipComponent>
+        </div>
+    );
 }
