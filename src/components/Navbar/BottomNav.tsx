@@ -31,7 +31,8 @@ export default function BottomNav() {
                   pageLink = "/";
                 }
                 const isExternalLink = pageLink.startsWith("http");
-
+                console.log(pageLink, "pageLink");
+                console.log(isExternalLink, "isExternalLink");
                 if (isExternalLink) {
                   return (
                     <Link
@@ -45,7 +46,7 @@ export default function BottomNav() {
                   );
                 } else {
                   return (
-                    <Link href={pageLink.toLowerCase()} key={item.id}>
+                    <Link href={`${pageLink.toLowerCase()}`} key={item.id}>
                       {item.title}
                     </Link>
                   );
