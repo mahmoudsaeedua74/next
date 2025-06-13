@@ -6,7 +6,7 @@ import Badge from "@/components/ui/Badge/Badge";
 import { Product } from "@/types/Product";
 import ProductsInfo from "./ProductsInfo";
 import Icon from "./Icon";
-import placeholderImage from "../../../../public/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg";
+import placeholderImage from "../../../../public/categoryLoading.jpg";
 
 interface RecommendedProductsCardProps {
   item: Product;
@@ -42,7 +42,7 @@ const RecommendedProductsCard = React.memo(function RecommendedProductsCard({
         >
           <Image
             src={item?.thumbnail || placeholderImage}
-            alt={item?.title ||"Headphone Product"}
+            alt={item?.title || "Headphone Product"}
             width={160}
             height={160}
             className="object-cover w-full aspect-square"

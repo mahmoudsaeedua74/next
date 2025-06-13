@@ -20,7 +20,7 @@ export interface Product {
 export interface Categories {
   id?: number;
   cover?: string;
-  name?: string;
+  name: string;
   products?: Product[];
   products_count?: string;
 }

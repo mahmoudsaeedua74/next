@@ -18,7 +18,7 @@ export default function Breadcrumb({
     pathname,
     onFilterChange,
 }: Slug) {
-    const formattedPathname = pathname.substring(1);
+    const formattedPathname = pathname ==="category"? pathname:pathname.substring(1);
     const result =
         formattedPathname.charAt(0).toUpperCase() + formattedPathname.slice(1);
     const handleResetFilters = () => {
@@ -27,7 +27,7 @@ export default function Breadcrumb({
     };
 
     return (
-        <nav className="bg-[#FEFAF4] py-3 px-4 rounded-lg my-6 flex justify-center items-center gap-2 font-medium">
+        <nav className="bg-nave py-3 px-4 rounded-lg my-6 flex justify-center items-center gap-2 font-medium">
             <Link
                 href="/"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
@@ -40,10 +40,10 @@ export default function Breadcrumb({
                     <IoIosArrowForward className="text-gray-500" />
                     <Link
                         onClick={() => handleResetFilters()}
-                        href={pathname}
+                        href={pathname==="category"?"/products": pathname}
                         className={`${
                             !category && !subCategories
-                                ? "text-[#FF9900]"
+                                ? "themed-text"
                                 : "text-gray-600 hover:text-gray-900 transition-colors"
                         }`}
                     >
@@ -58,7 +58,7 @@ export default function Breadcrumb({
                     <span
                         className={`${
                             category && !subCategories
-                                ? "text-[#FF9900]"
+                                ? "text-themed-text"
                                 : "text-gray-600 hover:text-gray-900 transition-colors"
                         }`}
                     >
@@ -70,7 +70,7 @@ export default function Breadcrumb({
             {subCategories && (
                 <>
                     <IoIosArrowForward className="text-gray-500" />
-                    <span className="text-[#FF9900]">{subCategories}</span>
+                    <span className="text-themed-text">{subCategories}</span>
                 </>
             )}
         </nav>

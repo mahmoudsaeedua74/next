@@ -59,23 +59,39 @@ export default function MobileSidebar({ isOpen, setIsOpen }: NavbarProps) {
               </button>
             </div>
             <div className="p-4">
-              <ul className="space-y-4 text-[#0661e9] font-medium">
-                {data?.map((item: Header) => (
-                  <li key={item.id}>
-                    <Link
-                      href={` ${
-                        item.title === "Home"
-                          ? "/"
-                          : item.title === "All Products"
-                          ? "/products"
-                          : `/${item.title}`
-                      }`}
-                      key={item.id}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
+              <ul className="space-y-4 text-[#0661e9] font-medium flex flex-col">
+                {data?.map((item: Header) => {
+                  let pageLink = item.pages?.[0]?.link || "/";
+
+                  if (pageLink === "/products/show/") {
+                    pageLink = "/products";
+                  }
+                  if (pageLink === "https://toollistings.com/") {
+                    pageLink = "/";
+                  }
+
+                  const isExternalLink = pageLink.startsWith("http");
+
+                  if (isExternalLink) {
+                    return (
+                      <Link
+                        href={pageLink}
+                        key={item.id}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <Link href={pageLink} key={item.id}  onClick={() => setIsOpen(false)}>
+                        {item.title}
+                      </Link>
+                    );
+                  }
+                })}
               </ul>
             </div>
             <div className="p-4 border-t">

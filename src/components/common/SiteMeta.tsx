@@ -1,59 +1,66 @@
 import React from "react";
 
-type Website = {
-  meta: string;
-  favicon: string;
-};
-export default function SiteMeta({ website }: { website: Website }) {
-  if (!website) return null;
-  const extractMetaTags = (metaString: string): React.ReactNode[] => {
-    const metaRegex =
-      /<meta[^>]*name=["']([^"']+)["'][^>]*content=["']([^"']+)["'][^>]*\/?>/g;
-    const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/g;
-    const inlineScriptRegex =
-      /<script[^>]*src=["']([^"']+)["'][^>]*><\/script>/g;
-    const elements: React.ReactNode[] = [];
-    const metaMatches = [...metaString.matchAll(metaRegex)];
-    metaMatches.forEach((match, index) => {
-      elements.push(
-        <meta key={`meta-${index}`} name={match[1]} content={match[2]} />
-      );
+const BASEURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+async function fetchWebsiteMeta() {
+  if (!BASEURL) return null;
+
+  try {
+    const res = await fetch(`${BASEURL}/theme`, {
+      next: {
+        revalidate: 3600,
+        tags: ["website-meta"],
+      },
     });
 
-    const scriptSrcMatches = [...metaString.matchAll(inlineScriptRegex)];
-    scriptSrcMatches.forEach((match, index) => {
-      const srcWithCache = `${match[1]}${
-        match[1].includes("?") ? "&" : "?"
-      }t=${Date.now()}`;
-      elements.push(
-        <script
-          key={`script-src-${index}`}
-          async
-          src={srcWithCache}
-          crossOrigin="anonymous"
-        />
-      );
-    });
+    if (!res.ok) throw new Error("Failed to fetch");
 
-    const inlineScriptMatches = [...metaString.matchAll(scriptRegex)];
-    inlineScriptMatches.forEach((match, index) => {
-      if (!match[0].includes("src=")) {
-        elements.push(
-          <script
-            key={`script-inline-${index}`}
-            dangerouslySetInnerHTML={{ __html: match[1] }}
-          />
-        );
-      }
-    });
+    const data = await res.json();
+    return data?.data?.theme?.website || null;
+  } catch (err) {
+    console.error("Error fetching metadata:", err);
+    return null;
+  }
+}
 
-    return elements;
-  };
+function extractMetaElements(metaString: string) {
+  if (!metaString) return [];
 
-  const metaTags = website?.meta ? extractMetaTags(website.meta) : null;
+  const metaRegex =
+    /<meta[^>]*name=["']([^"']+)["'][^>]*content=["']([^"']+)["'][^>]*\/?>/g;
+
+  const elements: React.JSX.Element[] = [];
+  let match;
+  let index = 0;
+
+  while ((match = metaRegex.exec(metaString)) !== null) {
+    elements.push(
+      <meta key={`dynamic-meta-${index}`} name={match[1]} content={match[2]} />
+    );
+    index++;
+  }
+
+  return elements;
+}
+
+export default async function MetaHead() {
+  const website = await fetchWebsiteMeta();
+  const metaElements = extractMetaElements(website?.meta || "");
 
   return (
     <>
+      <title>{website?.title || "Default Title"}</title>
+      <meta
+        name="description"
+        content={website?.description || "Default Description"}
+      />
+      <meta
+        name="keywords"
+        content={website?.keywords || "default, keywords"}
+      />
+      <meta name="author" content={website?.company_name || "Default Author"} />
+      <meta name="robots" content="index, follow" />
+
       {website?.favicon && (
         <link rel="icon" href={`${website.favicon}?v=${Date.now()}`} />
       )}
@@ -63,7 +70,7 @@ export default function SiteMeta({ website }: { website: Website }) {
       <link rel="preconnect" href="https://www.google-analytics.com" />
       <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
 
-      {metaTags}
+      {metaElements}
     </>
   );
 }

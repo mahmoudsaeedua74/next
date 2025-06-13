@@ -51,7 +51,7 @@ export default function ProductsCard({ product }: { product: Product }) {
                         <span className="text-sm font-medium mr-1">
                             {product.rate ?? 0}
                         </span>
-                        <Star size={16} fill="#FF9900" />
+                         <Star size={16} color="#FF9900" fill={"#FF9900"} />
                     </div>
                     <span className="text-xs text-gray-500 ml-1">
                         ({product.rate ?? 0})

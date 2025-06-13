@@ -42,7 +42,7 @@ export default function Filter({
     }
     return (
         <div className="flex flex-col h-fit gap-y-4 text-sm bg-[#F6F7F8] py-4 px-5 font-semibold rounded-md">
-            <CombinedCategories onFilterChange={onFilterChange} />
+            <CombinedCategories />
             <PriceFilter
                 min={allData.price_range.min}
                 max={allData.price_range.max}

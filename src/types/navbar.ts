@@ -1,6 +1,9 @@
 export interface Header {
-    id: number;
-    title: string;
+  id: number;
+  title: string;
+  pages?: {
+    link: string;
+  }[];
 }
 
 export interface NavbarProps {

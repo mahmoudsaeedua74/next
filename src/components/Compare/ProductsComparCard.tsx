@@ -62,9 +62,9 @@ export default function ProductsComparCard({ product }: { product: Product }) {
           </span>
         )}
         {product.offer && (
-          <span className="bg-[#dc2626] text-white text-xs px-2 py-0.5 rounded-full">
+          <div className="bg-[#dc2626] w-fit text-white text-xs px-2 py-0.5 rounded-full">
             {product.offer}% OFF
-          </span>
+          </div>
         )}
       </td>
       {detailKeys?.map((key) => (

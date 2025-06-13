@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Categories } from "@/types/Product";
 import React, { useState } from "react";
-import placeholderImage from "../../../public/360_F_517535712_q7f9QC9X6TQxWi6xYZZbMmw5cnLMr279.jpg";
+import placeholderImage from "../../../public/categoryLoading.jpg";
 
 export default function RecommendedCategoriesCard({
   item,

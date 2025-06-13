@@ -4,11 +4,9 @@ import { Star } from "lucide-react";
 import { Product } from "@/types/Product";
 import Badge from "../../ui/Badge/Badge";
 import OfferBadge from "@/components/ui/Badge/OfferBadge";
-import { useAppTheme } from "@/lib/context/Them";
 import { memo } from "react";
 
 const RecommendedCard = memo(({ item }: { item: Product }) => {
-    const { mainColor } = useAppTheme();
     if (!item.final_price) {
         return null;
     }
@@ -43,7 +41,7 @@ const RecommendedCard = memo(({ item }: { item: Product }) => {
                         <span className="text-sm font-medium mr-1">
                             {item.rate ?? 0}
                         </span>
-                        <Star size={16} fill={mainColor|| "hsl(35 84% 53%)"} />
+                        <Star size={16} color="#FF9900" fill={"#FF9900"} />
                     </div>
                     <span className="text-xs text-gray-500 ml-1">
                         ({item.rate ?? 0})

@@ -24,6 +24,10 @@ const animate = {
 
 export default function Gifts() {
     const { data: getGroups, isLoading } = useGroups();
+        // sectionTitle === null the section will hide 
+        if(getGroups?.length === 0|| getGroups?.getGroups[0]?.sectionTitle ===null){
+            return;
+        }
     return (
         <section>
             <motion.div {...animate}>

@@ -12,7 +12,7 @@ const RecommendedProducts = dynamic(
 );
 export default function Home() {
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 contain my-6">
             <HeroProducts />
             <RecommendedCategoriesComponent />
             <Gifts />

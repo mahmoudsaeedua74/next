@@ -2,11 +2,11 @@ type BadgeProps = {
     type: string | null;
 };
 export default function Badge({ type }: BadgeProps) {
-    if (!type) return null;
     const badgeColors = {
         "Best Seller": "bg-[#2563eb]",
         New: "bg-main",
     };
+    if (!type || type.startsWith("Sale") || !(type in badgeColors)) return null;
     const backgroundColor = badgeColors[type as keyof typeof badgeColors];
     return (
         <span

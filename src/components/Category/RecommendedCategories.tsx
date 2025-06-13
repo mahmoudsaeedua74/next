@@ -30,13 +30,21 @@ export default function RecommendedCategoriesComponent({
 }: FilterProps) {
   const { data: recommendedCategories, isLoading } = useRecommended();
   const router = useRouter();
-  const handleCategoryClick = (categoryId: number) => {
+  const handleCategoryClick = (categoryId: number, categoryName: string) => {
     if (onFilterChange) {
       onFilterChange("category", categoryId);
+      router.push(
+        `/category/${categoryName.toLowerCase().replace(/\s+/g, "-")}`
+      );
     } else {
-      router.push(`/products?category=${categoryId}`);
+      router.push(
+        `/category/${categoryName.toLowerCase().replace(/\s+/g, "-")}`
+      );
     }
   };
+  if (recommendedCategories?.recommendedCategories[0]?.sectionTitle === null) {
+    return null;
+  }
   return (
     <section>
       <div>
@@ -64,7 +72,8 @@ export default function RecommendedCategoriesComponent({
                     <RecommendedCategoriesCard
                       item={item}
                       onClick={() =>
-                        item.id !== undefined && handleCategoryClick(item.id)
+                        item.id !== undefined &&
+                        handleCategoryClick(item.id, item.name)
                       }
                     />
                   </CarouselItem>

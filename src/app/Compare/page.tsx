@@ -8,9 +8,7 @@ import dynamic from "next/dynamic";
 const ProductsComparCard = dynamic(
   () => import("@/components/Compare/ProductsComparCard")
 );
-const SkeletonCard = dynamic(
-  () => import("@/components/Wishlist/SkeletonCard")
-);
+const Spinner = dynamic(() => import("@/components/ui/Loader"));
 const Heading = dynamic(() => import("@/components/common/Heading"));
 const RecommendedProductsCard = dynamic(
   () =>
@@ -31,7 +29,7 @@ const detailKeys = [
   "UnitCount",
 ];
 const attributes = ["Product", "Name", "price", ...detailKeys, "Actions"];
-export default function ComparePage() {
+export default function Page() {
   const dispatch = useAppDispatch();
   const compareItems = useAppSelector(
     (state) => state.compareSlice.compareItems
@@ -54,14 +52,13 @@ export default function ComparePage() {
   }, [compareItems]);
 
   if (loading) {
-    return <SkeletonCard />;
+    return <Spinner />;
   }
   if (compareItems.length === 0) {
     return <EmptyCart title={" No results found... Please Back to Home ."} />;
   }
   //   const { details } = compareItems[1];
   //   ...Object.keys(details ?? {}),
-  //   console.log(compareItems[0]);
 
   return (
     <div className=" py-8 ">

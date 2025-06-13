@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp, FaAngleRight } from "react-icons/fa";
 import { useCategories } from "@/lib/api/queries";
+import Link from "next/link";
 
 interface Category {
   id: number;
@@ -11,13 +12,13 @@ interface Category {
 }
 
 interface CombinedCategoriesProps {
-  onFilterChange: (filterType: string, value: number | null) => void;
+  // onFilterChange: (filterType: string, value: number | null) => void;
   selectedMainCategory?: number | null;
   selectedSubCategory?: number | null;
 }
 
 export default function CombinedCategories({
-  onFilterChange,
+  // onFilterChange,
   selectedMainCategory = null,
   selectedSubCategory = null,
 }: CombinedCategoriesProps) {
@@ -39,24 +40,24 @@ export default function CombinedCategories({
     }));
   };
 
-  const handleMainCategoryClick = (id: number) => {
-    if (id === selectedMainCategory) {
-      onFilterChange("main_category", null);
-    } else {
-      onFilterChange("main_category", id);
-    }
-  };
+  // const handleMainCategoryClick = (id: number) => {
+  //   if (id === selectedMainCategory) {
+  //     onFilterChange("main_category", null);
+  //   } else {
+  //     onFilterChange("main_category", id);
+  //   }
+  // };
 
-  const handleSubCategoryClick = (mainId: number, subId: number) => {
-    if (subId === selectedSubCategory) {
-      onFilterChange("category", null);
-    } else {
-      onFilterChange("category", subId);
-    }
-    if (selectedMainCategory !== mainId) {
-      onFilterChange("main_category", mainId);
-    }
-  };
+  // const handleSubCategoryClick = (mainId: number, subId: number) => {
+  //   if (subId === selectedSubCategory) {
+  //     onFilterChange("category", null);
+  //   } else {
+  //     onFilterChange("category", subId);
+  //   }
+  //   if (selectedMainCategory !== mainId) {
+  //     onFilterChange("main_category", mainId);
+  //   }
+  // };
 
   if (isLoading) {
     return (
@@ -103,16 +104,19 @@ export default function CombinedCategories({
         {mainCategories?.map((mainCategory: Category) => (
           <div key={mainCategory.id} className="mb-2">
             <div className="flex items-center justify-between p-2 rounded-md transition-colors">
-              <span
+              <Link
+                href={`/category/${mainCategory.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
                 className={`text-sm cursor-pointer ${
                   selectedMainCategory === mainCategory.id
                     ? "themed-text"
                     : "hover:text-gray-700"
                 }`}
-                onClick={() => handleMainCategoryClick(mainCategory.id)}
+                // onClick={() => handleMainCategoryClick(mainCategory.id)}
               >
                 {mainCategory.name}
-              </span>
+              </Link>
 
               {mainCategory.categories &&
                 Object.keys(mainCategory.categories).length > 0 && (
@@ -148,14 +152,21 @@ export default function CombinedCategories({
                             ? "themed-text"
                             : "hover:bg-gray-100"
                         }`}
-                        onClick={() =>
-                          handleSubCategoryClick(
-                            mainCategory.id,
-                            parseInt(subId)
-                          )
-                        }
+                        // onClick={() =>
+                        //   handleSubCategoryClick(
+                        //     mainCategory.id,
+                        //     parseInt(subId)
+                        //   )
+                        // }
                       >
-                        <span className="text-sm">{subName}</span>
+                        <Link
+                          href={`/category/${subName
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          className="text-sm"
+                        >
+                          {subName}
+                        </Link>
                       </div>
                     )
                   )}

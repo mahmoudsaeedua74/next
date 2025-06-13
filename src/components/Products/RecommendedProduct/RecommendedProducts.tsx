@@ -15,18 +15,24 @@ const RecommendedProductsSkeletonCard = dynamic(
 const AnimatedHeading = dynamic(() => import("../../common/AnimatedHeading"));
 export default function RecommendedProducts() {
   const { data: recommendedProducts, isLoading } = useRecommended();
+  // sectionTitle === null the section will hide
+  console.log(recommendedProducts, "recommendedProducts");
+  if (recommendedProducts?.suggestedProducts?.sectionTitle === null) {
+    return;
+  }
+
   return (
     <section className=" text-center">
       <div className="mb-8">
         <AnimatedHeading>
-          {recommendedProducts?.salesProducts[0]?.sectionTitle}
+          {recommendedProducts?.suggestedProducts?.sectionTitle}
         </AnimatedHeading>
       </div>
       <div className="grid text-start p-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
         {isLoading ? (
           <RecommendedProductsSkeletonCard />
         ) : (
-          recommendedProducts?.recommendedCategories[0]?.products?.map(
+          recommendedProducts?.suggestedProducts?.products?.map(
             (item: Product) => (
               <motion.div
                 key={item.id}

@@ -24,7 +24,7 @@ export default function ProductsInfo({
       <div className="flex items-center mt-2">
         <div className="flex items-center themed-text">
           <span className="text-sm font-medium mr-1">{item.rate ?? 0}</span>
-          <Star size={16} fill="#FF9900" />
+           <Star size={16} color="#FF9900" fill={"#FF9900"} />
         </div>
         <span className="text-xs text-gray-500 ml-1">
           ({item.reviews ?? 0}k)

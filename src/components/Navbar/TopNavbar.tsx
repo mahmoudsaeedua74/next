@@ -1,7 +1,7 @@
 "use client";
 import { Menu } from "lucide-react";
 import Image from "next/image";
-import logo from "../../../public/logo.jpg";
+import logo from "../../../public/logo.jpg"; // loading image
 import Link from "next/link";
 import "./Navbar.css";
 import NavIcons from "./NavIcons";
@@ -24,7 +24,7 @@ export default function TopNavbar({
       ? logo
       : data?.website?.logo;
   return (
-    <div className="bg-[#FEFAF4]">
+    <div className="bg-nave">
       <div className="nav-container contain flex-wrap">
         <div className="w-full flex justify-between lg:hidden">
           <div className="flex items-center">

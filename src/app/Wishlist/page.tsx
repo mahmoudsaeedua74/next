@@ -7,8 +7,8 @@ import { Product } from "@/types/Product";
 import { useSuggested } from "@/lib/api/queries";
 import { useAppDispatch, useAppSelector } from "@/lib/store/store";
 import dynamic from "next/dynamic";
-const SkeletonCard = dynamic(
-    () => import("@/components/Wishlist/SkeletonCard")
+const Spinner = dynamic(
+  () => import("@/components/ui/Loader")
 );
 const EmptyCart = dynamic(() => import("@/components/common/EmptyCart"));
 const Heading = dynamic(() => import("@/components/common/Heading"));
@@ -21,7 +21,7 @@ const RecommendedProductsCard = dynamic(
 const ProductsCard = dynamic(
     () => import("@/components/Wishlist/ProductsCard")
 );
-export default function WishlistPage() {
+export default function Page() {
     const dispatch = useAppDispatch();
     const wishlistItems = useAppSelector(
         (state) => state.wishlistSlice.wishlistItems
@@ -43,8 +43,9 @@ export default function WishlistPage() {
         }
     }, [wishlistItems]);
     if (loading) {
-        return <SkeletonCard />;
+        return <Spinner/>;
     }
+
     if (wishlistItems.length === 0) {
         return (
             <EmptyCart title="Your wishlist is empty... Please add products to your wishlist." />
