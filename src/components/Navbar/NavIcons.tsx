@@ -76,13 +76,13 @@ export default function NavIcons({ className = "" }: { className?: string }) {
             </div> */}
             {/* Wishlist */}
             <TooltipComponent title="Wishlist">
-                <Link href="/Wishlist" className="icon-with-text icon-navbar">
+                <Link href="/wishlist" className="icon-with-text icon-navbar">
                     <Heart />
                 </Link>
             </TooltipComponent>
             {/* Compare */}
             <TooltipComponent title="Compare">
-                <Link href="/Compare" className="icon-with-text icon-navbar">
+                <Link href="/compare" className="icon-with-text icon-navbar">
                     <GitCompareArrows />
                 </Link>
             </TooltipComponent>

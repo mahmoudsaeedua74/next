@@ -21,7 +21,7 @@ const RecommendedProductsCard = dynamic(
 const ProductsCard = dynamic(
     () => import("@/components/Wishlist/ProductsCard")
 );
-export default function WishlistPage() {
+export default function Page() {
     const dispatch = useAppDispatch();
     const wishlistItems = useAppSelector(
         (state) => state.wishlistSlice.wishlistItems
