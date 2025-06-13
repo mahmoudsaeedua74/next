@@ -29,6 +29,12 @@ export default function BottomNav() {
                 if (pageLink === "/products/show/") {
                   pageLink = "/products";
                 }
+                if (pageLink === "/compare") {
+                  pageLink = "/Compare";
+                }
+                if (pageLink === "/wishlist") {
+                  pageLink = "/Wishlist";
+                }
                 if (pageLink === "https://toollistings.com/") {
                   pageLink = "/";
                 }
