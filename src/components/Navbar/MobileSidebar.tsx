@@ -23,7 +23,6 @@ export default function MobileSidebar({ isOpen, setIsOpen }: NavbarProps) {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
-console.log(logo)
   return (
     <AnimatePresence>
       {isOpen && (

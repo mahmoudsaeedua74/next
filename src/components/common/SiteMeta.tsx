@@ -5,7 +5,6 @@ type Website = {
   favicon: string;
 };
 export default function SiteMeta({ website }: { website: Website }) {
-  console.log(website, "website");
   if (!website) return null;
   const extractMetaTags = (metaString: string): React.ReactNode[] => {
     const metaRegex =
