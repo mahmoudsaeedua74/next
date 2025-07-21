@@ -16,7 +16,6 @@ const AnimatedHeading = dynamic(() => import("../../common/AnimatedHeading"));
 export default function RecommendedProducts() {
   const { data: recommendedProducts, isLoading } = useRecommended();
   // sectionTitle === null the section will hide
-  console.log(recommendedProducts, "recommendedProducts");
   if (recommendedProducts?.suggestedProducts?.sectionTitle === null) {
     return;
   }
