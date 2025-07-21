@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Groups } from "@/types/Product";
 import React, { useState } from "react";
 import Link from "next/link";
-import placeholderImage from "../../../public/categoryLoading.jpg.jpg";
+import placeholderImage from "../../../public/categoryLoading.jpg";
 export default function GiftCard({ item }: { item: Groups }) {
   const [imgError, setImgError] = useState(false);
   const imageSrc =

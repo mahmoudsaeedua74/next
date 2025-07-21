@@ -69,7 +69,7 @@ export default function ProductsCard({ product }: { product: Product }) {
                     )}
                     {product.offer && (
                         <span className="bg-[#dc2626] text-white text-xs px-2 py-0.5 rounded-full">
-                            {product.offer}% OFF
+                            -{product.offer}%
                         </span>
                     )}
                 </div>

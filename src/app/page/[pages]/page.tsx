@@ -8,20 +8,19 @@ import NotFound from "@/app/not-found";
 
 export default function Page() {
   const params = useParams();
-  const slug = (params.pages as string) || '';
+  const slug = (params.pages as string) || "";
   const { data, isLoading } = useFooterLink(slug);
   if (isLoading) {
-    return <Spinner/>;
+    return <Spinner />;
   }
-  
+
   if (!data?.content) {
-    return <NotFound/>;
+    return <NotFound />;
   }
-  
+
   return (
-    <section className="contain py-8 " key={slug}>
-      {parse(data.content)}
+    <section className="contain py-8" key={slug}>
+      <div className="read-only-content">{parse(data.content)}</div>
     </section>
-    
   );
 }

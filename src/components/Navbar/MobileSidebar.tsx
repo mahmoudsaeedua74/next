@@ -59,7 +59,7 @@ export default function MobileSidebar({ isOpen, setIsOpen }: NavbarProps) {
               </button>
             </div>
             <div className="p-4">
-              <ul className="space-y-4 text-[#0661e9] font-medium flex flex-col">
+              <ul className="space-y-4 text-[#004dc1] font-medium flex flex-col">
                 {data?.map((item: Header) => {
                   let pageLink = item.pages?.[0]?.link || "/";
 

@@ -1,6 +1,7 @@
 "use client";
-import React, { createContext, useContext, ReactNode, useEffect } from "react";
+import React, { createContext, useContext, ReactNode, useEffect, useState } from "react";
 import { useThem } from "@/lib/api/queries";
+import { getFontByApiName } from "../dynamic-fonts";
 
 interface ThemeContextType {
   mainColor: string;
@@ -27,6 +28,7 @@ function hslToHsla(hsl: string, alpha: number = 0.2): string {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const { data: theme, isLoading, error } = useThem();
+  const [currentFont, setCurrentFont] = useState("fallback");
 
   useEffect(() => {
     if (theme?.theme) {
@@ -42,22 +44,26 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         );
       }
 
-      if (theme?.theme.font) {
-        document.documentElement.style.setProperty(
-          "--font-family",
-          theme.theme.font
-        );
+    if (theme?.theme.font) {
+        getFontByApiName(theme.theme.font).then((success) => {
+          if (success) {
+            setCurrentFont(theme.theme.font);
+          } else {
+            setCurrentFont("fallback");
+          }
+        });
       }
     }
   }, [theme?.theme]);
 
-  const contextValue = {
+ const contextValue = {
     mainColor: theme?.theme?.main_color
       ? `hsl(${theme?.theme.main_color})`
       : "hsl(103 74% 17%)",
     fontFamily: theme?.theme?.font || "sans-serif",
     isLoading,
     error,
+    currentFont,
   };
 
   return (

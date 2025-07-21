@@ -1,17 +1,11 @@
 "use client";
 import React, { useState, useCallback, memo } from "react";
-import {
-  LayoutGrid,
-  ChevronDown,
-  ChevronUp,
-  ChevronRight,
-} from "lucide-react";
-import { PiBomb } from "react-icons/pi";
+import { LayoutGrid, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MainCategory } from "@/types/CategoryWithSubs";
 import Link from "next/link";
-import { useCategories } from "@/lib/api/queries";
-
+import { useCategories, useThem } from "@/lib/api/queries";
+import { GiRose } from "react-icons/gi";
 
 const CategoryItem = memo(
   ({
@@ -19,15 +13,17 @@ const CategoryItem = memo(
     index,
     activeIndex,
     setActiveIndex,
+    icon,
   }: {
     category: MainCategory;
     index: number;
     activeIndex: number | null;
+    icon: string;
     setActiveIndex: (index: number | null) => void;
   }) => {
     const isActive = activeIndex === index;
-    const hasMultipleSubcategories = category.categories && Object.keys(category.categories).length > 1;
-    
+    const hasMultipleSubcategories =
+      category.categories && Object.keys(category.categories).length > 1;
     return (
       <li
         onMouseEnter={() => hasMultipleSubcategories && setActiveIndex(index)}
@@ -36,7 +32,7 @@ const CategoryItem = memo(
       >
         <div className="flex items-center justify-between px-4 py-2 hover:bg-[#F1F1F1] hover:font-bold cursor-pointer transition-colors duration-200">
           <div className="flex items-center gap-2">
-            <PiBomb className="w-4 h-4 text-gray-500" />
+            <GiRose />
             <Link
               href={`/category/${category.name
                 .toLowerCase()
@@ -51,36 +47,35 @@ const CategoryItem = memo(
         </div>
 
         <AnimatePresence>
-          {isActive &&
-            hasMultipleSubcategories && (
-              <motion.div
-                initial={{ opacity: 0, x: -5 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -5 }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-8 sm:top-0 left-1/4 sm:left-full w-64 bg-white border border-gray-200 rounded-md shadow-lg z-[999]"
-              >
-                <h4 className="px-4 py-2 font-semibold text-[#121535] text-lg mb-2">
-                  {category.name}
-                </h4>
-                <ul className="space-y-2">
-                  {Object.entries(category.categories)?.map(
-                    ([subId, subName]) => (
-                      <Link
-                        href={`/category/${subName
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        key={subId}
-                        className="px-4 py-2 group hover:bg-[#F1F1F1] flex items-center gap-2 hover:font-bold cursor-pointer transition-colors duration-150"
-                      >
-                        <span className="w-2 h-2 bg-[#b3b3b3] group-hover:bg-[#333333] rounded-full inline-block" />
-                        <span>{subName}</span>
-                      </Link>
-                    )
-                  )}
-                </ul>
-              </motion.div>
-            )}
+          {isActive && hasMultipleSubcategories && (
+            <motion.div
+              initial={{ opacity: 0, x: -5 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -5 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-8 sm:top-0 left-1/4 sm:left-full w-64 bg-white border border-gray-200 rounded-md shadow-lg z-[999]"
+            >
+              <h4 className="px-4 py-2 font-semibold text-[#121535] text-lg mb-2">
+                {category.name}
+              </h4>
+              <ul className="space-y-2">
+                {Object.entries(category.categories)?.map(
+                  ([subId, subName]) => (
+                    <Link
+                      href={`/category/${subName
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                      key={subId}
+                      className="px-4 py-2 group hover:bg-[#F1F1F1] flex items-center gap-2 hover:font-bold cursor-pointer transition-colors duration-150"
+                    >
+                      <span className="w-2 h-2 bg-[#b3b3b3] group-hover:bg-[#333333] rounded-full inline-block" />
+                      <span>{subName}</span>
+                    </Link>
+                  )
+                )}
+              </ul>
+            </motion.div>
+          )}
         </AnimatePresence>
       </li>
     );
@@ -92,7 +87,7 @@ const CategoryDropdown = () => {
   const { data: mainCategories, isLoading, isError } = useCategories();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
-
+  const { data: theme } = useThem();
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);
@@ -154,6 +149,7 @@ const CategoryDropdown = () => {
               {mainCategories?.map((category: MainCategory, index: number) => (
                 <CategoryItem
                   key={category.id}
+                  icon={theme?.website?.context}
                   category={category}
                   index={index}
                   activeIndex={activeIndex}
