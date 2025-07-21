@@ -4,7 +4,7 @@ import { LayoutGrid, ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MainCategory } from "@/types/CategoryWithSubs";
 import Link from "next/link";
-import { useCategories, useThem } from "@/lib/api/queries";
+import { useCategories } from "@/lib/api/queries";
 import { GiRose } from "react-icons/gi";
 
 const CategoryItem = memo(
@@ -13,12 +13,11 @@ const CategoryItem = memo(
     index,
     activeIndex,
     setActiveIndex,
-    icon,
   }: {
     category: MainCategory;
     index: number;
     activeIndex: number | null;
-    icon: string;
+
     setActiveIndex: (index: number | null) => void;
   }) => {
     const isActive = activeIndex === index;
@@ -87,7 +86,6 @@ const CategoryDropdown = () => {
   const { data: mainCategories, isLoading, isError } = useCategories();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const { data: theme } = useThem();
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);
@@ -149,7 +147,6 @@ const CategoryDropdown = () => {
               {mainCategories?.map((category: MainCategory, index: number) => (
                 <CategoryItem
                   key={category.id}
-                  icon={theme?.website?.context}
                   category={category}
                   index={index}
                   activeIndex={activeIndex}
